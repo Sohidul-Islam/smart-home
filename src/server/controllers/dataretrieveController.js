@@ -44,6 +44,18 @@ exports.tmphum = (req, res) => {
         }
     })
 }
+exports.allDevice = (req, res) => {
+    ledStatus.getAll((err, data) => {
+        if (err) {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occured in inventoryReport function",
+            });
+        } else {
+            res.send(data[0]);
+        }
+    })
+}
 
 
 

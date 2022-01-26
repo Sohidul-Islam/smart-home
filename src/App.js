@@ -17,7 +17,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/led")
+      .get("http://192.168.1.2:8000/led")
       .then((res) => {
         console.log("element ", res.data);
         setLedState(res.data);

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import RoundSlider from "./roundSlider";
 import Navitem from './navitem';
-class DeviceControl extends Component {
+class DeviceControlWithSlider extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,7 +12,6 @@ class DeviceControl extends Component {
 
 
         setTimeout(() => {
-            console.log("device control : ", this.props.knobSize);
             console.log("device control : ", RoundSlider(props));
         }, 1000);
     }
@@ -123,4 +122,4 @@ class DeviceControl extends Component {
     }
 }
 
-export default DeviceControl;
+export default DeviceControlWithSlider;
