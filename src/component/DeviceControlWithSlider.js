@@ -9,80 +9,50 @@ class DeviceControlWithSlider extends Component {
             check: false,
             value: 0,
         };
-
-        setTimeout(() => {
-            console.log("device onchange : ", props.onChange);
-        }, 1000);
     }
     DeviceControlSwitch = (event) => {
-        console.log(event.target.checked);
         var check = event.target.checked;
-        var state = this.state;
-        if (check === true) {
-            state.isSwitchOn = "ON";
-            state.check = true;
-        } else {
-            state.isSwitchOn = "OFF";
-            state.check = false;
-        }
 
-        console.log(state);
-        this.setState(state);
+        if (check === true) {
+            this.setState({
+                isSwitchOn: "ON",
+                check: true,
+            });
+        } else {
+            this.setState({
+                isSwitchOn: "OFF",
+                check: false,
+            });
+        }
     };
     incrementValue = () => {
-        // console.log("device control index: ", this.props.dataIndex);
-        var tmpstate = this.state;
-        tmpstate.value = tmpstate.value + 20;
-        if (tmpstate.value <= 100) {
-            this.setState(
-                {
-                    tmpstate,
-                },
-                () => {
-                    console.log(this.state);
-                }
-            );
+        var nwvalue = this.state.value + 20;
+        if (nwvalue <= 100) {
+            this.setState({
+                value: nwvalue,
+            });
         } else {
-            tmpstate.value = 0;
-            this.setState(
-                {
-                    tmpstate,
-                },
-                () => {
-                    console.log(this.state);
-                }
-            );
+            this.setState({
+                value: 0,
+            });
         }
     };
     decrementValue = () => {
-        var state = this.state;
-        state.value = state.value - 1;
-        if (state.value >= 0) {
-            this.setState(
-                {
-                    state,
-                },
-                () => {
-                    console.log(this.state);
-                }
-            );
+        const nwvalue = this.state.value - 20;
+        if (nwvalue >= 0) {
+            this.setState({
+                value: nwvalue,
+            });
         } else {
-            state.value = 5;
-            this.setState(
-                {
-                    state,
-                },
-                () => {
-                    console.log(this.state);
-                }
-            );
+            this.setState({
+                value: 100,
+            });
         }
     };
     getvalue = (value) => {
-        console.log("get value", value);
-        var state = this.state;
-        state.value = value;
-        this.setstate(state);
+        this.setState({
+            value,
+        });
     };
     render() {
         return (
@@ -125,6 +95,7 @@ class DeviceControlWithSlider extends Component {
                                     appendToValue={this.props.appendToValue}
                                     image={this.props.image}
                                     val={this.getvalue}
+                                    data={this.state.value}
                                 />
                             </div>
                             <div className="d-none d-md-inline-block ms-3">

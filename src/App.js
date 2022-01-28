@@ -8,7 +8,7 @@ import WelcomeUser from "./component/WelcomeUser";
 import DeviceControl from "./component/DeviceControl";
 import Navitem from "./component/navitem";
 import DeviceControlWithSlider from "./component/DeviceControlWithSlider";
-import Rechart from "./component/Rechart";
+import Chart from "./component/chart";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -157,7 +157,7 @@ function App() {
                   </div>
                 </div>
               </div>
-              <Rechart />
+              <Chart />
 
               <div></div>
             </div>

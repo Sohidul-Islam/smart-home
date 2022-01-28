@@ -6,7 +6,7 @@ export default function WelcomeUser(props) {
             className="card welcome-card text-dark"
 
         >
-            <img className="welcome-image " src={props.image}></img>
+            <img className="welcome-image " src={props.image} alt={"welcome image"}></img>
             <div className="card-img-overlay">
                 <div className="card-text--box">
                     <h5 className="card-title card-text-1">Hello, {props.name}!</h5>

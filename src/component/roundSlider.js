@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CircularSlider from "@fseehawer/react-circular-slider";
+// import DeviceSlider from "./DeviceControlWithSlider";
 import { ReactComponent as EmojiIcon } from "../svg2.svg";
 
 class roundSlider extends Component {
@@ -8,6 +9,7 @@ class roundSlider extends Component {
         this.state = {
             data: 0,
         };
+        console.log("round slider: ", this.state.data);
     }
 
     render() {
@@ -26,10 +28,11 @@ class roundSlider extends Component {
                     trackSize={24}
                     appendToValue={this.props.appendToValue}
                     data={[0, 20, 40, 60, 80, 100]} //...
-
+                    dataIndex={this.props.data / 20}
                     onChange={(value) => {
-                        this.setState({ data: value });
-                        this.props.val(this.state.data)
+                        console.log("on change : value:", typeof value);
+                        this.props.val(value);
+                        console.log("round slider: ", this.state.data);
                     }}
                 >
                     <EmojiIcon x="8" y="8" width="35px" height="27px" />
