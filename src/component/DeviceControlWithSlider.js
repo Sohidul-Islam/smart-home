@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import RoundSlider from "./roundSlider";
 import Navitem from "./navitem";
+
 class DeviceControlWithSlider extends Component {
     constructor(props) {
         super(props);

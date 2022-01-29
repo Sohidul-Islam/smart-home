@@ -10,10 +10,15 @@ import Navitem from "./component/navitem";
 import DeviceControlWithSlider from "./component/DeviceControlWithSlider";
 import Chart from "./component/chart";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function App() {
   const [listOfLed, setLedState] = useState([]);
+  const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' },
+  ];
 
   useEffect(() => {
     axios
@@ -26,6 +31,8 @@ function App() {
         console.error(error);
       });
   }, []);
+
+
   var user = "Shufol";
   var ledData = listOfLed.map((value, key) => {
     return (
@@ -41,6 +48,8 @@ function App() {
       </div>
     );
   });
+
+  const [selectedOption, setSelectedOption] = useState(null);
   return (
     <div className="App">
       <div className="container">
@@ -85,11 +94,12 @@ function App() {
                         className="nav-form"
                         aria-label="Default select example"
                       >
-                        <option selected>Select Room</option>
-                        <option value="1">Living Room</option>
-                        <option value="2">Kitchen Room</option>
-                        <option value="3">Dining Room</option>
+                        <option>Select Room</option>
+                        <option>Living Room</option>
+                        <option>Kitchen Room</option>
+                        <option>Dining Room</option>
                       </select>
+
                     </div>
                   </div>
                 </div>
@@ -119,12 +129,13 @@ function App() {
                         className="nav-form"
                         aria-label="Default select example"
                       >
-                        <option selected>Select State</option>
-                        <option value="1" selected>
+                        <option >Select State</option>
+                        <option>
                           ON
                         </option>
                         <option value="2">OFF</option>
                       </select>
+
                     </div>
                   </div>
                 </div>
@@ -146,12 +157,13 @@ function App() {
                           className="nav-form"
                           aria-label="Default select example"
                         >
-                          <option selected>Select Option</option>
-                          <option value="1" selected>
+                          <option>Select Option</option>
+                          <option>
                             Month
                           </option>
-                          <option value="2">Year</option>
+                          <option>Year</option>
                         </select>
+
                       </div>
                     </div>
                   </div>
