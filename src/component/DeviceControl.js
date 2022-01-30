@@ -25,19 +25,19 @@ class DeviceControl extends Component {
         const url = "http://localhost:8000/device/update/";
         console.log(event.target.checked);
         var check = event.target.checked;
-        var state = this.state;
+        var newState = this.state;
         if (check === true) {
-            state.status = "ON";
-            state.className = "lightOn";
-            state.check = true;
+            newState.status = "ON";
+            newState.className = "lightOn";
+            newState.check = true;
         } else {
-            state.status = "OFF";
-            state.className = "lightOff";
-            state.check = false;
+            newState.status = "OFF";
+            newState.className = "lightOff";
+            newState.check = false;
         }
 
-        console.log(state);
-        this.setState(state);
+        console.log(newState);
+        this.setState(newState);
 
         const requestMetadata = {
             method: "POST",

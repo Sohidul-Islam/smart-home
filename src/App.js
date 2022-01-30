@@ -14,11 +14,6 @@ import React, { useEffect, useState } from "react";
 
 function App() {
   const [listOfLed, setLedState] = useState([]);
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-  ];
 
   useEffect(() => {
     axios
@@ -31,7 +26,6 @@ function App() {
         console.error(error);
       });
   }, []);
-
 
   var user = "Shufol";
   var ledData = listOfLed.map((value, key) => {

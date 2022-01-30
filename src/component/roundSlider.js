@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import CircularSlider from "@fseehawer/react-circular-slider";
-// import DeviceSlider from "./DeviceControlWithSlider";
 import { ReactComponent as EmojiIcon } from "../svg2.svg";
 
 class roundSlider extends Component {
@@ -9,7 +8,6 @@ class roundSlider extends Component {
         this.state = {
             data: 0,
         };
-        console.log("round slider: ", this.state.data);
     }
 
     render() {
