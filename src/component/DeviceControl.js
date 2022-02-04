@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 class DeviceControl extends Component {
     constructor(props) {
+
         super(props);
-        if (this.props.status === "ON") {
+        if (props.status === "ON") {
             this.state = {
                 status: props.status,
                 idled: props.idled,
@@ -18,12 +19,36 @@ class DeviceControl extends Component {
             };
         }
 
+        // console.log("constractor props: ", props);
+
     }
+
+    // statContentUpdate() {
+    //     console.log("set update; ");
+    //     if (this.props.status !== this.state.status) {
+    //         if (this.props.status === "ON") {
+    //             this.setState({
+    //                 status: this.props.status,
+    //                 idled: this.props.idled,
+    //                 check: true,
+    //                 className: this.rops.classname,
+    //             })
+    //         } else {
+    //             this.setState({
+    //                 status: this.props.status,
+    //                 idled: this.props.idled,
+    //                 check: false,
+    //                 className: this.props.classname,
+    //             })
+    //         }
+    //     }
+
+    // }
 
     DeviceControlSwitch = (event) => {
         // const url = "http://192.168.1.5:8000/led/update";
         const url = "http://localhost:8000/device/update/";
-        console.log(event.target.checked);
+        console.log("event: ", event.target.checked);
         var check = event.target.checked;
         var newState = this.state;
         if (check === true) {
@@ -36,8 +61,9 @@ class DeviceControl extends Component {
             newState.check = false;
         }
 
-        console.log(newState);
-        this.setState(newState);
+        this.setState(newState, () => {
+            console.log("event: ", event.target.checked, " state: ", this.state);
+        });
 
         const requestMetadata = {
             method: "POST",
@@ -54,18 +80,19 @@ class DeviceControl extends Component {
     };
 
     render() {
+        console.log("Render");
         return (
             <div className={this.state.className + " card device-card"}>
                 <div className="card-body">
                     <div className="device-switch-box">
-                        <label className=" device-switch-label" htmlFor={this.props.ID}>
+                        <label className=" device-switch-label" htmlFor={this.state.idled}>
                             {this.state.status}
                         </label>
 
                         <label className="switch  device-switch float-end">
                             <input
                                 type="checkbox"
-                                id={this.props.ID}
+                                id={this.state.idled}
                                 value={this.state.status}
                                 onClick={this.DeviceControlSwitch}
                                 onChange={this.DeviceControlSwitch}

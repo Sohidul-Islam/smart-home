@@ -28,9 +28,7 @@ class roundSlider extends Component {
                     data={[0, 20, 40, 60, 80, 100]} //...
                     dataIndex={this.props.data / 20}
                     onChange={(value) => {
-                        console.log("on change : value:", typeof value);
                         this.props.val(value);
-                        console.log("round slider: ", this.state.data);
                     }}
                 >
                     <EmojiIcon x="8" y="8" width="35px" height="27px" />

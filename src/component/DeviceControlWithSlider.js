@@ -5,55 +5,96 @@ import Navitem from "./navitem";
 class DeviceControlWithSlider extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isSwitchOn: "OFF",
-            check: false,
-            value: 0,
-        };
+        if (this.props.status === "ON")
+            this.state = {
+                fan_id: this.props.fan_id,
+                status: this.props.status,
+                check: true,
+                speed: this.props.speed,
+            };
+        else {
+            this.state = {
+                fan_id: this.props.fan_id,
+                status: this.props.status,
+                check: false,
+                speed: this.props.speed,
+            };
+        }
+        // console.log("props: ", this.props);
+        // console.log("check: ", this.state.check);
     }
     DeviceControlSwitch = (event) => {
         var check = event.target.checked;
 
         if (check === true) {
             this.setState({
-                isSwitchOn: "ON",
+                status: "ON",
                 check: true,
             });
         } else {
             this.setState({
-                isSwitchOn: "OFF",
+                status: "OFF",
                 check: false,
             });
         }
+
+        setTimeout(() => {
+            const url = "http://localhost:8000/device/update";
+            const requestMetadata = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(this.state),
+            };
+            fetch(url, requestMetadata)
+                .then((res) => res.json())
+                .then((recipes) => {
+                    this.setState({ recipes });
+                });
+        }, 500);
     };
-    incrementValue = () => {
-        var nwvalue = this.state.value + 20;
-        if (nwvalue <= 100) {
+    incrementspeed = () => {
+        var nwspeed = this.state.speed + 20;
+        if (nwspeed <= 100) {
             this.setState({
-                value: nwvalue,
+                speed: nwspeed,
             });
         } else {
             this.setState({
-                value: 0,
+                speed: 0,
             });
         }
     };
-    decrementValue = () => {
-        const nwvalue = this.state.value - 20;
-        if (nwvalue >= 0) {
+    decrementspeed = () => {
+        const nwspeed = this.state.speed - 20;
+        if (nwspeed >= 0) {
             this.setState({
-                value: nwvalue,
+                speed: nwspeed,
             });
         } else {
             this.setState({
-                value: 100,
+                speed: 100,
             });
         }
     };
-    getvalue = (value) => {
+    getspeed = (speed) => {
         this.setState({
-            value,
+            speed,
         });
+        const url = "http://localhost:8000/device/update";
+        const requestMetadata = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(this.state),
+        };
+        fetch(url, requestMetadata)
+            .then((res) => res.json())
+            .then((recipes) => {
+                this.setState({ recipes });
+            });
     };
     render() {
         return (
@@ -71,7 +112,7 @@ class DeviceControlWithSlider extends Component {
                             <input
                                 type="checkbox"
                                 id={this.props.ID}
-                                value={this.state.isSwitchOn}
+                                speed={this.state.status}
                                 onClick={this.DeviceControlSwitch}
                                 onChange={this.DeviceControlSwitch}
                                 checked={this.state.check}
@@ -83,29 +124,48 @@ class DeviceControlWithSlider extends Component {
                     <div className="text-center">
                         <div className="d-block">
                             <div className="d-none d-md-inline-block me-3">
-                                <button
-                                    className="d-inline-block slider-device-button btn primary-bg text-light"
-                                    onClick={this.decrementValue}
-                                >
-                                    -
-                                </button>
+                                {this.state.check == true && (
+                                    <button
+                                        className="d-inline-block slider-device-button btn primary-bg text-light"
+                                        onClick={this.decrementspeed}
+                                    >
+                                        -
+                                    </button>
+                                )}
                             </div>
                             <div className="d-inline-block">
-                                <RoundSlider
-                                    label="Speed"
-                                    appendToValue={this.props.appendToValue}
-                                    image={this.props.image}
-                                    val={this.getvalue}
-                                    data={this.state.value}
-                                />
+                                {this.state.check == true && (
+                                    <RoundSlider
+                                        label="Speed"
+                                        appendTospeed={this.props.appendTospeed}
+                                        image={this.props.image}
+                                        val={this.getspeed}
+                                        data={this.state.speed}
+                                    />
+                                )}
+                                {this.state.check == false && (
+                                    <div
+                                        className="text-box d-inline-block"
+                                        style={{
+                                            padding: "40px",
+                                            marginBottom: "40px",
+                                            border: "2px solid #6F5CEA",
+                                            borderRadius: "50%",
+                                        }}
+                                    >
+                                        <h3 className="text-1">OFF</h3>
+                                    </div>
+                                )}
                             </div>
                             <div className="d-none d-md-inline-block ms-3">
-                                <button
-                                    className="d-inline-block slider-device-button btn primary-bg text-light"
-                                    onClick={this.incrementValue}
-                                >
-                                    +
-                                </button>
+                                {this.state.check == true && (
+                                    <button
+                                        className="d-inline-block slider-device-button btn primary-bg text-light"
+                                        onClick={this.incrementspeed}
+                                    >
+                                        +
+                                    </button>
+                                )}
                             </div>
                         </div>
                     </div>

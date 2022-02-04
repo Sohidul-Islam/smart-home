@@ -1,11 +1,4 @@
 const ledStatus = require("../moduler/dataretrieve");
-const axios = require("axios");
-
-// var data = axios.get('http://localhost:8000/led').then(res => {
-//     console.log(res.data)
-// }).catch(error => {
-//     console.error(error)
-// })
 
 exports.led = (req, res) => {
     ledStatus.allLed((err, data) => {
