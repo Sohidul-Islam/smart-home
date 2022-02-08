@@ -6,42 +6,130 @@ import "../node_modules/bootstrap/dist/js/bootstrap.bundle.js";
 import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
 import WelcomeUser from "./component/WelcomeUser";
 import DeviceControl from "./component/DeviceControl";
-import Navitem from "./component/navitem";
+import NavItem from "./component/NavItem";
 import DeviceControlWithSlider from "./component/DeviceControlWithSlider";
 import Chart from "./component/chart";
 import axios from "axios";
 import React, { Component } from "react";
 import UserHome from "./component/usersHome";
+import TopNavBar from "./component/TopNavBar";
 
 export default class App extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      ledData: []
-    }
-    this.getDataLed();
-  }
-
-  // componentDidMount() {
-  //   this.getDataLed();
-  // }
-
-  getDataLed = async () => {
-    console.log("get data");
-    const result = await axios.get("http://localhost:8000/led");
-    this.state({ ledData: result.data });
-
+  state = {
+    ledData: [],
+    selectedLedData: [],
   };
 
+  componentDidMount() {
+    axios
+      .get(`http://localhost:8000/led`)
+      .then((res) => {
+        const ledData = res.data;
+        const selectedLedData = [];
+        ledData.map((led, key) => {
+          if (led.status === "ON") {
+            selectedLedData.push(led);
+          }
+        });
+        this.setState({ ledData, selectedLedData });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
+  onLedDataChange = (changedData) => {
+    const newLedData = [...this.state.ledData];
+    const selectedLedData = [];
+    this.state.ledData.map((led, key) => {
+      if (led.idled === changedData.idled) {
+        newLedData[key].status = changedData.status;
+        newLedData[key].className = changedData.className;
+      }
+      if (led.status === "ON") {
+        selectedLedData.push(led);
+      }
+    });
+    this.setState({ ledData: newLedData, selectedLedData });
+  };
 
   render() {
+    var user = "Shufol";
     return (
       <>
-        <UserHome led={this.state.ledData}></UserHome>
+        <div className="App">
+          <div className="container">
+            <div className="row clearfix g-5">
+              <div className="col-md-8 col-12  ">
+                <TopNavBar />
+                <WelcomeUser image={vector1} name="Shufol" temperature={25} />
+                <UserHome
+                  ledData={this.state.ledData}
+                  onLedDataChange={this.onLedDataChange}
+                />
+                <UserHome
+                  ledData={this.state.selectedLedData}
+                  onLedDataChange={this.onLedDataChange}
+                  title={"Only selected led Data"}
+                />
+                {/* <div className="DeviceSlider pb-4">{fanData}</div> */}
+              </div>
+              {/* <div className="col-md-4 col-12 smart-col2 ">
+                <div className="smart-nav pb-3 clearfix my-device-nav ">
+                  <div className="text-box d-inline-block">
+                    <h3 className="text-1">My Devices</h3>
+                  </div>
+                  <div className="nav-item-box float-lg-end">
+                    <div className="row">
+                      <div className="col">
+                        <div className="nav-form-box">
+                          <select
+                            className="nav-form"
+                            aria-label="Default select example"
+                            value={`${DeviceStatesList.status}`}
+                            onChange={FindDeviceAsStatus}
+                          >
+                            <option>Select State</option>
+                            <option value="ON">ON</option>
+                            <option value="OFF">OFF</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div className="row g-4">{ledData2}</div>
+
+                  {/* chart */}
+              {/* <div className="smart-nav py-3 clearfix my-device-nav ">
+                    <div className="text-box d-inline-block">
+                      <h3 className="text-1">Power Consumed</h3>
+                    </div>
+                    <div className="nav-item-box float-lg-end">
+                      <div className="row">
+                        <div className="col">
+                          <div className="nav-form-box">
+                            <select
+                              className="nav-form"
+                              aria-label="Default select example"
+                            >
+                              <option>Select Option</option>
+                              <option>Month</option>
+                              <option>Year</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <Chart />
+                  <div></div> */}
+            </div>
+          </div>
+        </div>
       </>
-    )
+    );
   }
 }
 
