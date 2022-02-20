@@ -5,8 +5,8 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle.js";
 import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
 import WelcomeUser from "./component/WelcomeUser";
-import DeviceControl from "./component/DeviceControl";
-import NavItem from "./component/NavItem";
+// import DeviceControl from "./component/DeviceControl";
+// import NavItem from "./component/NavItem";
 import DeviceControlWithSlider from "./component/DeviceControlWithSlider";
 import Chart from "./component/chart";
 import axios from "axios";
@@ -18,6 +18,7 @@ export default class App extends Component {
   state = {
     ledData: [],
     selectedLedData: [],
+    fanData: [],
   };
 
   componentDidMount() {
@@ -36,10 +37,28 @@ export default class App extends Component {
       .catch((error) => {
         console.error(error);
       });
+
+    axios
+      .get(`http://localhost:8000/fan`)
+      .then((res) => {
+        const fanData = res.data;
+        // const selectedLedData = [];
+        // ledData.map((led, key) => {
+        //   if (led.status === "ON") {
+        //     selectedLedData.push(led);
+        //   }
+        // });
+        this.setState({ fanData: fanData });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
+
 
   onLedDataChange = (changedData) => {
     const newLedData = [...this.state.ledData];
+    console.log("newLedData: ", newLedData);
     const selectedLedData = [];
     this.state.ledData.map((led, key) => {
       if (led.idled === changedData.idled) {
@@ -67,13 +86,32 @@ export default class App extends Component {
                   ledData={this.state.ledData}
                   onLedDataChange={this.onLedDataChange}
                 />
+
+                <div className="DeviceSlider py-4">{this.state.fanData.map((value, key) => {
+                  console.log("fan value: ", value);
+                  return (
+                    <div key={key} className="col-12">
+                      <DeviceControlWithSlider
+                        appendToValue={"%"}
+                        image={vector2}
+                        status={value.status}
+                        fan_id={value.fan_id}
+                        speed={value.speed}
+                        className="fas fa-fan device-icon"
+                        text={"Fan " + value.fan_id}
+                      />
+                    </div>
+                  )
+                })}</div>
+              </div>
+              <div className="col-md-4 col-12 smart-col2 ">
                 <UserHome
                   ledData={this.state.selectedLedData}
                   onLedDataChange={this.onLedDataChange}
-                  title={"Only selected led Data"}
+                  title={"ON State Devices"}
                 />
-                {/* <div className="DeviceSlider pb-4">{fanData}</div> */}
               </div>
+
               {/* <div className="col-md-4 col-12 smart-col2 ">
                 <div className="smart-nav pb-3 clearfix my-device-nav ">
                   <div className="text-box d-inline-block">
