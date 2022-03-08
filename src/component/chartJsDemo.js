@@ -27,7 +27,6 @@ export default function ChartJSDemo() {
             // gradient.addColorStop(1, Utils.CHART_COLORS.red);
             // const gradient = ctx.createLinearGradient(0, area.bottom, 0, area.top);
 
-
             gradient.addColorStop(0.3, "#ffffff");
             gradient.addColorStop(0.5, "#FFB697");
             // gradient.addColorStop(0.8, "#FF611F");
