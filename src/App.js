@@ -110,7 +110,10 @@ export default class App extends Component {
                   onLedDataChange={this.onLedDataChange}
                   title={"ON State Devices"}
                 />
+
+                <Chart />
               </div>
+
 
               {/* <div className="col-md-4 col-12 smart-col2 ">
                 <div className="smart-nav pb-3 clearfix my-device-nav ">
