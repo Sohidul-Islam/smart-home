@@ -268,11 +268,21 @@ input:checked + .slider:before {
 .sensorIcon {
   font-size: 32px;
 }
+.Sensor-card {
+  min-width: 163px;
+  min-height: 136px;
+  border-radius: 16px !important;
+  transition: all 0.5s ease-in;
+}
+.Sensor-card:hover {
+  background-color: #00b4d8 !important;
+  color: rgb(255, 255, 255) !important;
+}
 .Detected {
   background-color: #d90429 !important;
   color: #fff !important;
 }
 .Not-Detected {
-  background-color: #38b000 !important;
-  color: #fff !important;
+  background-color: #ccff33 !important;
+  color: #000 !important;
 }

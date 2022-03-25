@@ -51,12 +51,12 @@ export default class SensorDevices extends Component {
                 className="far fa-lightbulb device-icon"
                 ledChanged={this.props.onLedDataChange}
               /> */}
-              <div className={isDetected(value.status) + " card device-card"}>
+              <div className={isDetected(value.status) + " card Sensor-card"}>
                 <div className="card-body">
                   <h3>{value.id}</h3>
                   <h4>{sensorType(value.type)}</h4>
                   <i className={sensorIcon(value.type) + " sensorIcon"}></i>
-                  <h4>{isDetected(value.status)}</h4>
+                  <h6>{isDetected(value.status)}</h6>
                 </div>
               </div>
             </div>
