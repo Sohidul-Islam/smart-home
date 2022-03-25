@@ -45,7 +45,16 @@ exports.allDevice = (req, res) => {
                     err.message || "Some error occured in inventoryReport function",
             });
         } else {
-            res.send(data[0]);
+            console.log("All Load Devices: ", data);
+            let device = {
+                Load: {
+                    Lights: data[0],
+                    Fans: data[1]
+                },
+                sensor: data[2]
+
+            }
+            res.send(device);
         }
     })
 }

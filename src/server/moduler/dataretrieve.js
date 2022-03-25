@@ -40,7 +40,7 @@ deviceStatus.alltmphum = (result) => {
 
 deviceStatus.getAll = (result) => {
     // let q1 = `SELECT * FROM led;SELECT * FROM fan;`;
-    let q1 = `SELECT * FROM led;SELECT * FROM fan;`;
+    let q1 = `SELECT * FROM led;SELECT * FROM fan;SELECT * FROM sensor;`;
 
     sql.query(q1, (err, res) => {
         if (err) {
