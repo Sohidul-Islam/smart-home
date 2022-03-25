@@ -265,3 +265,14 @@ input:checked + .slider:before {
     padding: 0px;
   }
 }
+.sensorIcon {
+  font-size: 32px;
+}
+.Detected {
+  background-color: #d90429 !important;
+  color: #fff !important;
+}
+.Not-Detected {
+  background-color: #38b000 !important;
+  color: #fff !important;
+}

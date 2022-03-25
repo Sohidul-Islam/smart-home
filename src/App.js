@@ -13,12 +13,15 @@ import axios from "axios";
 import React, { Component } from "react";
 import UserHome from "./component/usersHome";
 import TopNavBar from "./component/TopNavBar";
+import SensorDevice from "./component/SensorDevices";
+import ErrorBoundary from "./component/ErrorBoundary";
 
 export default class App extends Component {
   state = {
     ledData: [],
     selectedLedData: [],
     fanData: [],
+    sensorData: [],
   };
 
   componentDidMount() {
@@ -53,6 +56,22 @@ export default class App extends Component {
       .catch((error) => {
         console.error(error);
       });
+    axios
+      .get(`http://localhost:8000/device`)
+      .then((res) => {
+        const TempSensorData = res.data.sensor;
+        // const selectedLedData = [];
+        // ledData.map((led, key) => {
+        //   if (led.status === "ON") {
+        //     selectedLedData.push(led);
+        //   }
+        // });
+        console.log("Sensor data: ", TempSensorData);
+        this.setState({ sensorData: TempSensorData });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
 
@@ -80,38 +99,53 @@ export default class App extends Component {
           <div className="container">
             <div className="row clearfix g-5">
               <div className="col-md-8 col-12  ">
-                <TopNavBar />
-                <WelcomeUser image={vector1} name="Shufol" temperature={25} />
-                <UserHome
-                  ledData={this.state.ledData}
-                  onLedDataChange={this.onLedDataChange}
-                />
-
-                <div className="DeviceSlider py-4">{this.state.fanData.map((value, key) => {
-                  console.log("fan value: ", value);
-                  return (
-                    <div key={key} className="col-12">
-                      <DeviceControlWithSlider
-                        appendToValue={"%"}
-                        image={vector2}
-                        status={value.status}
-                        fan_id={value.fan_id}
-                        speed={value.speed}
-                        className="fas fa-fan device-icon"
-                        text={"Fan " + value.fan_id}
-                      />
-                    </div>
-                  )
-                })}</div>
+                <ErrorBoundary>
+                  <TopNavBar />
+                </ErrorBoundary>
+                <ErrorBoundary>
+                  <WelcomeUser image={vector1} name="Shufol" temperature={25} />
+                </ErrorBoundary>
+                <ErrorBoundary>
+                  <SensorDevice title="Sensor Data" sensorData={this.state.sensorData}></SensorDevice>
+                </ErrorBoundary>
+                <ErrorBoundary>
+                  <UserHome
+                    ledData={this.state.ledData}
+                    onLedDataChange={this.onLedDataChange}
+                  />
+                </ErrorBoundary>
+                <ErrorBoundary>
+                  <div className="DeviceSlider py-4">{this.state.fanData.map((value, key) => {
+                    console.log("fan value: ", value);
+                    return (
+                      <div key={key} className="col-12">
+                        <DeviceControlWithSlider
+                          appendToValue={"%"}
+                          image={vector2}
+                          status={value.status}
+                          fan_id={value.fan_id}
+                          speed={value.speed}
+                          className="fas fa-fan device-icon"
+                          text={"Fan " + value.fan_id}
+                        />
+                      </div>
+                    )
+                  })}</div>
+                </ErrorBoundary>
               </div>
               <div className="col-md-4 col-12 smart-col2 ">
-                <UserHome
-                  ledData={this.state.selectedLedData}
-                  onLedDataChange={this.onLedDataChange}
-                  title={"ON State Devices"}
-                />
+                <ErrorBoundary>
+                  <UserHome
+                    ledData={this.state.selectedLedData}
+                    onLedDataChange={this.onLedDataChange}
+                    title={"ON State Devices"}
+                  />
+                </ErrorBoundary>
 
-                <Chart />
+                <ErrorBoundary>
+                  <Chart />
+                </ErrorBoundary>
+
               </div>
 
 

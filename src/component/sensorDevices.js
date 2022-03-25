@@ -1,11 +1,34 @@
 import React, { Component } from "react";
-import DeviceControl from "./DeviceControl";
-import NavItem from "./NavItem";
 
-export default class usersHome extends Component {
+
+export default class SensorDevices extends Component {
   render() {
     var user = "Shufol";
+    function sensorType(value) {
+      if (value === 0)
+        return "Fire"
+      else if (value === 1)
+        return "Water Level"
+      else if (value === 2)
+        return "Gas"
 
+    }
+    function sensorIcon(value) {
+      if (value === 0)
+        return "fa-solid fa-fire"
+      else if (value === 1)
+        return "fa-solid fa-droplet"
+      else if (value === 2)
+        return "fa-solid fa-gas-pump"
+
+    }
+    function isDetected(value) {
+      if (value === 0)
+        return "Not-Detected"
+      else
+        return "Detected"
+
+    }
     return (
       <>
         <div className="smart-nav pb-3 clearfix">
@@ -14,34 +37,12 @@ export default class usersHome extends Component {
               {this.props.title ? this.props.title : `${user}'s Home`}
             </h3>
           </div>
-          <div className="nav-item-box float-lg-end">
-            <div className="row">
-              <div className="col">
-                <NavItem text="35%" className="fas fa-tint" />
-              </div>
-              <div className="col">
-                <NavItem text="25ºC" className="fas fa-thermometer-quarter" />
-              </div>
-              <div className="col">
-                <div className="nav-form-box">
-                  <select
-                    className="nav-form"
-                    aria-label="Default select example"
-                  >
-                    <option>Select Room</option>
-                    <option>Living Room</option>
-                    <option>Kitchen Room</option>
-                    <option>Dining Room</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-        <div className="row">
-          {this.props.ledData.map((led, key) => (
-            <div key={key} className="col-sm-6 col-md-6">
-              <DeviceControl
+        <div className="row g-4 mb-3">
+          {this.props.sensorData.map((value, key) => {
+            console.log(value);
+            return <div key={key} className="col-4">
+              {/* <DeviceControl
                 ID={"light_" + led.idled}
                 idled={led.idled}
                 status={led.status}
@@ -49,9 +50,17 @@ export default class usersHome extends Component {
                 deviceName={"light " + led.idled}
                 className="far fa-lightbulb device-icon"
                 ledChanged={this.props.onLedDataChange}
-              />
+              /> */}
+              <div className={isDetected(value.status) + " card device-card"}>
+                <div className="card-body">
+                  <h3>{value.id}</h3>
+                  <h4>{sensorType(value.type)}</h4>
+                  <i className={sensorIcon(value.type) + " sensorIcon"}></i>
+                  <h4>{isDetected(value.status)}</h4>
+                </div>
+              </div>
             </div>
-          ))}
+          })}
         </div>
       </>
     );
