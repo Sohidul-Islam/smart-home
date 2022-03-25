@@ -2,6 +2,12 @@ import React, { Component } from "react";
 
 
 export default class SensorDevices extends Component {
+  state = {
+    ledData: [],
+    selectedLedData: [],
+    fanData: [],
+    sensorData: [],
+  };
   render() {
     var user = "Shufol";
     function sensorType(value) {

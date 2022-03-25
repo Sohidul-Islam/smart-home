@@ -1,13 +1,13 @@
--- MariaDB dump 10.19  Distrib 10.5.12-MariaDB, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
 --
--- Host: mysql.hostinger.ro    Database: u574849695_22
+-- Host: 127.0.0.1    Database: smarthome
 -- ------------------------------------------------------
--- Server version	10.5.12-MariaDB-cll-lve
+-- Server version	8.0.25
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -16,29 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tmphum`
+-- Table structure for table `sensor`
 --
 
-DROP TABLE IF EXISTS `tmphum`;
+DROP TABLE IF EXISTS `sensor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tmphum` (
-  `id` int(9) unsigned NOT NULL AUTO_INCREMENT,
-  `tmp` float(10,4) NOT NULL,
-  `hum` varchar(255) NOT NULL,
-  `date` datetime NOT NULL DEFAULT current_timestamp(),
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sensor` (
+  `id` int NOT NULL,
+  `status` int DEFAULT NULL,
+  `type` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tmphum`
+-- Dumping data for table `sensor`
 --
 
-LOCK TABLES `tmphum` WRITE;
-/*!40000 ALTER TABLE `tmphum` DISABLE KEYS */;
-INSERT INTO `tmphum` VALUES (1,88.3595,'24.0696447','1970-01-01 00:00:00'),(2,34.0864,'24','1970-01-01 00:00:00'),(3,57.0000,'81.2497','1970-01-01 00:00:00'),(4,99.8339,'45.78','1970-01-01 00:00:00'),(5,98.7941,'47.70061','1970-01-01 00:00:00'),(6,53.2472,'99','1970-01-01 00:00:00'),(7,64.0000,'64.8645','1970-01-01 00:00:00'),(8,59.8435,'96.996','1970-01-01 00:00:00'),(9,88.4337,'73.44','1970-01-01 00:00:00'),(10,77.0204,'93.649','1970-01-01 00:00:00');
-/*!40000 ALTER TABLE `tmphum` ENABLE KEYS */;
+LOCK TABLES `sensor` WRITE;
+/*!40000 ALTER TABLE `sensor` DISABLE KEYS */;
+INSERT INTO `sensor` VALUES (1,1,0),(2,1,1),(3,0,2);
+/*!40000 ALTER TABLE `sensor` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-03-25 19:00:00
+-- Dump completed on 2022-03-26  2:48:33
