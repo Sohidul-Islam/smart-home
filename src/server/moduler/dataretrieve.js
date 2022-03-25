@@ -48,7 +48,7 @@ deviceStatus.getAll = (result) => {
             result(null, err);
             return;
         }
-        console.log("Query TESTING: ", res);
+        // console.log("Query TESTING: ", res);
         result(null, res);
     });
 };

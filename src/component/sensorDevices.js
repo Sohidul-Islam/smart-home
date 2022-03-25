@@ -22,12 +22,15 @@ export default class SensorDevices extends Component {
         return "fa-solid fa-gas-pump"
 
     }
-    function isDetected(value) {
-      if (value === 0)
+    function isDetected(value, type) {
+      if (value === 0 && type != 1)
         return "Not-Detected"
-      else
+      else if (value === 1 && type != 1)
         return "Detected"
-
+      else if (value === 0 && type === 1)
+        return "Low"
+      else if (value === 1 && type === 1)
+        return "Full"
     }
     return (
       <>
@@ -40,23 +43,13 @@ export default class SensorDevices extends Component {
         </div>
         <div className="row g-4 mb-3">
           {this.props.sensorData.map((value, key) => {
-            console.log(value);
+            // console.log(value);
             return <div key={key} className="col-4">
-              {/* <DeviceControl
-                ID={"light_" + led.idled}
-                idled={led.idled}
-                status={led.status}
-                classname={led.className}
-                deviceName={"light " + led.idled}
-                className="far fa-lightbulb device-icon"
-                ledChanged={this.props.onLedDataChange}
-              /> */}
               <div className={isDetected(value.status) + " card Sensor-card"}>
                 <div className="card-body">
-                  <h3>{value.id}</h3>
-                  <h4>{sensorType(value.type)}</h4>
                   <i className={sensorIcon(value.type) + " sensorIcon"}></i>
-                  <h6>{isDetected(value.status)}</h6>
+                  <h4 style={{ marginTop: "16px", marginBottom: "0px" }}>{sensorType(value.type)}</h4>
+                  <h6>{isDetected(value.status, value.type)}</h6>
                 </div>
               </div>
             </div>

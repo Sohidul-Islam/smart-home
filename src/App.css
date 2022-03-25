@@ -266,23 +266,21 @@ input:checked + .slider:before {
   }
 }
 .sensorIcon {
-  font-size: 32px;
+  font-size: 66px;
 }
 .Sensor-card {
   min-width: 163px;
   min-height: 136px;
+  text-align: center;
   border-radius: 16px !important;
   transition: all 0.5s ease-in;
-}
-.Sensor-card:hover {
-  background-color: #00b4d8 !important;
-  color: rgb(255, 255, 255) !important;
+  /* cursor: pointer; */
 }
 .Detected {
-  background-color: #d90429 !important;
-  color: #fff !important;
+  background-color: #a41623 !important;
+  color: #faf0ca !important;
 }
 .Not-Detected {
-  background-color: #ccff33 !important;
-  color: #000 !important;
+  background-color: #0d3b66 !important;
+  color: #faf0ca !important;
 }

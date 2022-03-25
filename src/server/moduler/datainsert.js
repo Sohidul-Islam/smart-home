@@ -16,7 +16,7 @@ datainsert.insertled = (result) => {
             return;
         }
 
-        console.log("Led added successfully ", res);
+        // console.log("Led added successfully ", res);
         result(null, res);
     });
 };
@@ -29,7 +29,7 @@ datainsert.insertFan = (result) => {
             return;
         }
 
-        console.log("Led added successfully ", res);
+        // console.log("Led added successfully ", res);
         result(null, res);
     });
 };
@@ -41,7 +41,7 @@ datainsert.inserttmphum = (result) => {
             return;
         }
 
-        console.log("Led added successfully ", res);
+        // console.log("Led added successfully ", res);
         result(null, res);
     });
 };

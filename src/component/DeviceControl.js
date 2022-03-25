@@ -45,7 +45,7 @@ class DeviceControl extends Component {
   DeviceControlSwitch = (event) => {
     // const url = "http://192.168.1.5:8000/led/update";
     const url = "http://localhost:8000/device/update/";
-    console.log("event: ", event.target.checked);
+    // console.log("event: ", event.target.checked);
     var check = event.target.checked;
     var newState = this.state;
     if (check === true) {

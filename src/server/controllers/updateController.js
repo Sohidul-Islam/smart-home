@@ -16,7 +16,7 @@ exports.updateled = (req, res) => {
         });
     }
 
-    console.log("led update rq body: ", req.body);
+    // console.log("led update rq body: ", req.body);
 
     const Updatedata = new updatedata({
         idled: req.body.idled,

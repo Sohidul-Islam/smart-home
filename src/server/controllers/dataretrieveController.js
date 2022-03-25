@@ -8,7 +8,7 @@ exports.led = (req, res) => {
                     err.message || "Some error occured in inventoryReport function",
             });
         } else {
-            console.log("data: ", data);
+            // console.log("data: ", data);
             res.send(data);
         }
     })
@@ -45,7 +45,7 @@ exports.allDevice = (req, res) => {
                     err.message || "Some error occured in inventoryReport function",
             });
         } else {
-            console.log("All Load Devices: ", data);
+            // console.log("All Load Devices: ", data);
             let device = {
                 Load: {
                     Lights: data[0],
