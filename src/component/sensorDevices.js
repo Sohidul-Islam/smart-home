@@ -1,5 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
+
 
 export default class SensorDevices extends Component {
   state = {
@@ -60,6 +65,14 @@ export default class SensorDevices extends Component {
         <div className="row g-4 mb-3">
           {this.state.sensorData.map((value, key) => {
             // console.log(value);
+            if (value.status === 1) {
+              MySwal.fire({
+                title: sensorType(value.type) + " " + isDetected(value.status, value.type),
+                text: 'Do you want to Fix It',
+                icon: 'error',
+                confirmButtonText: 'YES'
+              })
+            }
             return <div key={key} className="col-4">
               <div className={isDetected(value.status) + " card Sensor-card"}>
                 <div className="card-body">
