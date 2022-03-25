@@ -76,19 +76,19 @@ dataupdate.updateDevice = (update, result) => {
         UpdateQueryHandler(SqlQuery, result);
         query4 = ""
     }
-    if (update.temphum != undefined) {
-        console.log("we get sensor");
-        console.log("For Sensor Query: ", update.temphum.length);
-        for (let i = 0; i < update.temphum.length; i++) {
-            // INSERT INTO led(status) values('OFF')
-            query4 += `INSERT INTO tmphum(value,type) values(${update.temphum[i].value},${update.temphum[i].type});`;
+    // if (update.temphum != undefined) {
+    //     console.log("we get sensor");
+    //     console.log("For Sensor Query: ", update.temphum.length);
+    //     for (let i = 0; i < update.temphum.length; i++) {
+    //         // INSERT INTO led(status) values('OFF')
+    //         query4 += `INSERT INTO tmphum(value,type) values(${update.temphum[i].value},${update.temphum[i].type});`;
 
-        }
-        console.log(query4);
-        SqlQuery = query4;
-        UpdateQueryHandler(SqlQuery, result);
-        query4 = ""
-    }
+    //     }
+    //     console.log(query4);
+    //     SqlQuery = query4;
+    //     UpdateQueryHandler(SqlQuery, result);
+    //     query4 = ""
+    // }
 
 };
 

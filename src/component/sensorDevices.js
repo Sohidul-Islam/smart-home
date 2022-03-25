@@ -1,13 +1,23 @@
 import React, { Component } from "react";
-
+import axios from "axios";
 
 export default class SensorDevices extends Component {
   state = {
-    ledData: [],
-    selectedLedData: [],
-    fanData: [],
     sensorData: [],
   };
+  componentDidMount() {
+    setInterval(() => {
+      axios
+        .get(`http://localhost:8000/device`)
+        .then((res) => {
+          const TempSensorData = res.data.sensor;
+          this.setState({ sensorData: TempSensorData });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }, 1000)
+  }
   render() {
     var user = "Shufol";
     function sensorType(value) {
@@ -48,7 +58,7 @@ export default class SensorDevices extends Component {
           </div>
         </div>
         <div className="row g-4 mb-3">
-          {this.props.sensorData.map((value, key) => {
+          {this.state.sensorData.map((value, key) => {
             // console.log(value);
             return <div key={key} className="col-4">
               <div className={isDetected(value.status) + " card Sensor-card"}>

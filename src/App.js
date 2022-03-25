@@ -19,7 +19,6 @@ export default class App extends Component {
     ledData: [],
     selectedLedData: [],
     fanData: [],
-    sensorData: [],
   };
 
   componentDidMount() {
@@ -48,18 +47,6 @@ export default class App extends Component {
       .catch((error) => {
         console.error(error);
       });
-
-    setInterval(() => {
-      axios
-        .get(`http://localhost:8000/device`)
-        .then((res) => {
-          const TempSensorData = res.data.sensor;
-          this.setState({ sensorData: TempSensorData });
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }, 1000)
   }
   onLedDataChange = (changedData) => {
     const newLedData = [...this.state.ledData];
@@ -92,7 +79,7 @@ export default class App extends Component {
                   <WelcomeUser image={vector1} name="Shufol" temperature={25} />
                 </ErrorBoundary>
                 <ErrorBoundary>
-                  <SensorDevice title="Sensor Data" sensorData={this.state.sensorData}></SensorDevice>
+                  <SensorDevice title="Sensor Data"></SensorDevice>
                 </ErrorBoundary>
                 <ErrorBoundary>
                   <UserHome
