@@ -78,20 +78,31 @@ exports.updateDevice = (req, res) => {
           delete req.body['temphum'];
           req.body['temphum'] = temp;
         }
-
+        updatedata.updateDevice(req.body, (err, data) => {
+          if (err) {
+            res.status(400).send({ message: 'update device have some error' });
+          } else {
+            res.send({
+              message: 'success',
+              data: req.body
+            });
+          }
+        });
+      }
+    });
+  } else {
+    updatedata.updateDevice(req.body, (err, data) => {
+      if (err) {
+        res.status(400).send({ message: 'update device have some error' });
+      } else {
+        res.send({
+          message: 'success',
+          data: req.body
+        });
       }
     });
   }
-  updatedata.updateDevice(req.body, (err, data) => {
-    if (err) {
-      res.status(400).send({ message: 'update device have some error' });
-    } else {
-      res.send({
-        message: 'success',
-        data: req.body
-      });
-    }
-  });
+
 
 };
 

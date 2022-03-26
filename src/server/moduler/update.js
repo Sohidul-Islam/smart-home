@@ -52,20 +52,21 @@ dataupdate.updateDevice = (update, result) => {
   var query1 = `update led set status ='${update.status}', className = '${update.className}' where idled = ${update.idled}`;
   var query2 = `update fan set status ='${update.status}', speed = ${update.speed} where fan_id = ${update.fan_id};`;
   var query4 = '';
-  if (update.idled != undefined) {
+  if (update.idled !== undefined) {
     SqlQuery = query1;
     UpdateQueryHandler(SqlQuery, result);
-  } else if (update.fan_id != undefined) {
+  } else if (update.fan_id !== undefined) {
     SqlQuery = query2;
     console.log("fan query: ", SqlQuery);
     UpdateQueryHandler(SqlQuery, result);
   }
 
-  if (update.sensor != undefined) {
+  if (update.sensor !== undefined) {
     for (let i = 0; i < update.sensor.length; i++) {
       query4 += `update sensor set status = ${update.sensor[i].status} where id = ${update.sensor[i].id};`;
     }
-    if (update.temphum != undefined) {
+    if (update.temphum !== undefined) {
+      console.log("temphum: ", update.temphum);
       query4 += `INSERT INTO tmphum(tmp,hum) values(${update.temphum.tmp},${update.temphum.hum});`;
     }
 

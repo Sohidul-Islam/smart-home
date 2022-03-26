@@ -82,7 +82,7 @@ class DeviceControlWithSlider extends Component {
     this.setState({
       speed,
     });
-    const url = 'http://localhost:8000/device/update';
+    const url = 'http://localhost:8000/device';
     const requestMetadata = {
       method: 'POST',
       headers: {

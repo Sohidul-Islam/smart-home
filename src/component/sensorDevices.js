@@ -46,8 +46,8 @@ export default class SensorDevices extends Component {
     function isDetected(value, type) {
       if (value === 0 && type !== 1) return 'Not-Detected';
       else if (value === 1 && type !== 1) return 'Detected';
-      else if (value === 0 && type === 1) return 'Low';
-      else if (value === 1 && type === 1) return 'Full';
+      else if (value === 0 && type === 1) return 'Full';
+      else if (value === 1 && type === 1) return 'Low';
     }
     return (
       <>
