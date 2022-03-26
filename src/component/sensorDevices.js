@@ -4,12 +4,23 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
 const MySwal = withReactContent(Swal);
+const swalCheck = [false, false, false]
 
 export default class SensorDevices extends Component {
   state = {
     sensorData: [],
+
   };
   componentDidMount() {
+    axios
+      .get(`http://localhost:8000/device`)
+      .then(res => {
+        const TempSensorData = res.data.sensor;
+        this.setState({ sensorData: TempSensorData });
+      })
+      .catch(error => {
+        console.error(error);
+      });
     // axios
     //   .get(`http://localhost:8000/device`)
     //   .then(res => {
@@ -19,6 +30,20 @@ export default class SensorDevices extends Component {
     //   .catch(error => {
     //     console.error(error);
     //   });
+    // setInterval(() => {
+    //   axios
+    //     .get(`http://localhost:8000/device`)
+    //     .then(res => {
+    //       const TempSensorData = res.data.sensor;
+    //       this.setState({ sensorData: TempSensorData });
+    //     })
+    //     .catch(error => {
+    //       console.error(error);
+    //     });
+    // }, 1000);
+  }
+
+  componentWillMount() {
     setInterval(() => {
       axios
         .get(`http://localhost:8000/device`)
@@ -29,7 +54,32 @@ export default class SensorDevices extends Component {
         .catch(error => {
           console.error(error);
         });
-    }, 5000);
+    }, 1000);
+  }
+  UpdateSensor = (id, type) => {
+    console.log("Update sensor: ");
+    const url = 'http://localhost:8000/device';
+    const requestMetadata = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        sensor: [
+          {
+            id: id,
+            status: 0,
+            type: type
+          }
+        ]
+      }),
+    };
+    console.log("Req meta data: ", requestMetadata);
+    fetch(url, requestMetadata)
+      .then(res => res.json())
+      .then(recipes => {
+        this.setState({ recipes });
+      });
   }
   render() {
     var user = 'Shufol';
@@ -60,7 +110,8 @@ export default class SensorDevices extends Component {
         </div>
         <div className="row g-4 mb-3">
           {this.state.sensorData.map((value, key) => {
-            if (value.status === 1) {
+            if (value.status === 1 && swalCheck[key] === false) {
+
               MySwal.fire({
                 title:
                   sensorType(value.type) +
@@ -68,11 +119,23 @@ export default class SensorDevices extends Component {
                   isDetected(value.status, value.type),
                 text: 'Do you want to Fix It',
                 icon: 'error',
+                backdrop: false,
                 confirmButtonText: 'YES',
+              }).then((result) => {
+                swalCheck[key] = true;
+                if (result.isConfirmed) {
+                  Swal.fire(
+                    'Fixed!',
+                    'Your file has been deleted.',
+                    'success'
+                  )
+                  this.UpdateSensor(value.id, value.type)
+                }
               });
+
             }
             return (
-              <div key={key} className="col-4">
+              <div key={key} className="col- col-xm-6 col-sm-6 col-md-6 col-lg-4">
                 <div className={isDetected(value.status) + ' card Sensor-card'}>
                   <div className="card-body">
                     <i className={sensorIcon(value.type) + ' sensorIcon'}></i>
