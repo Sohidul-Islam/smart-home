@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 class DeviceControl extends Component {
   constructor(props) {
     super(props);
 
-    if (props.status === "ON") {
+    if (props.status === 'ON') {
       this.state = {
         status: props.status,
         idled: props.idled,
@@ -42,40 +42,40 @@ class DeviceControl extends Component {
 
   // }
 
-  DeviceControlSwitch = (event) => {
+  DeviceControlSwitch = event => {
     // const url = "http://192.168.1.5:8000/led/update";
-    const url = "http://localhost:8000/device/update/";
+    const url = 'http://localhost:8000/device/update2/';
     // console.log("event: ", event.target.checked);
     var check = event.target.checked;
     var newState = this.state;
     if (check === true) {
-      newState.status = "ON";
-      newState.className = "lightOn";
+      newState.status = 'ON';
+      newState.className = 'lightOn';
       newState.check = true;
     } else {
-      newState.status = "OFF";
-      newState.className = "lightOff";
+      newState.status = 'OFF';
+      newState.className = 'lightOff';
       newState.check = false;
     }
     this.props.ledChanged(newState);
 
     const requestMetadata = {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(this.state),
     };
     fetch(url, requestMetadata)
-      .then((res) => res.json())
-      .then((recipes) => {
+      .then(res => res.json())
+      .then(recipes => {
         this.setState({ recipes });
       });
   };
 
   render() {
     return (
-      <div className={this.state.className + " card device-card"}>
+      <div className={this.state.className + ' card device-card'}>
         <div className="card-body">
           <div className="device-switch-box">
             <label className=" device-switch-label" htmlFor={this.state.idled}>
@@ -89,8 +89,7 @@ class DeviceControl extends Component {
                 value={this.state.status}
                 onClick={this.DeviceControlSwitch}
                 onChange={this.DeviceControlSwitch}
-                checked={this.state.check}
-              ></input>
+                checked={this.state.check}></input>
               <span className="slider round"></span>
             </label>
           </div>

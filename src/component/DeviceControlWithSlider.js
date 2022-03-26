@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import RoundSlider from "./roundSlider";
-import Navitem from "./NavItem";
+import React, { Component } from 'react';
+import RoundSlider from './roundSlider';
+import Navitem from './NavItem';
 
 class DeviceControlWithSlider extends Component {
   constructor(props) {
     super(props);
-    if (this.props.status === "ON")
+    if (this.props.status === 'ON')
       this.state = {
         fan_id: this.props.fan_id,
         status: this.props.status,
@@ -23,33 +23,33 @@ class DeviceControlWithSlider extends Component {
     // console.log("props: ", this.props);
     // console.log("check: ", this.state.check);
   }
-  DeviceControlSwitch = (event) => {
+  DeviceControlSwitch = event => {
     var check = event.target.checked;
 
     if (check === true) {
       this.setState({
-        status: "ON",
+        status: 'ON',
         check: true,
       });
     } else {
       this.setState({
-        status: "OFF",
+        status: 'OFF',
         check: false,
       });
     }
 
     setTimeout(() => {
-      const url = "http://localhost:8000/device/update";
+      const url = 'http://localhost:8000/device/update2';
       const requestMetadata = {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(this.state),
       };
       fetch(url, requestMetadata)
-        .then((res) => res.json())
-        .then((recipes) => {
+        .then(res => res.json())
+        .then(recipes => {
           this.setState({ recipes });
         });
     }, 500);
@@ -78,21 +78,21 @@ class DeviceControlWithSlider extends Component {
       });
     }
   };
-  getspeed = (speed) => {
+  getspeed = speed => {
     this.setState({
       speed,
     });
-    const url = "http://localhost:8000/device/update";
+    const url = 'http://localhost:8000/device/update';
     const requestMetadata = {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(this.state),
     };
     fetch(url, requestMetadata)
-      .then((res) => res.json())
-      .then((recipes) => {
+      .then(res => res.json())
+      .then(recipes => {
         this.setState({ recipes });
       });
   };
@@ -115,8 +115,7 @@ class DeviceControlWithSlider extends Component {
                 speed={this.state.status}
                 onClick={this.DeviceControlSwitch}
                 onChange={this.DeviceControlSwitch}
-                checked={this.state.check}
-              ></input>
+                checked={this.state.check}></input>
               <span className="slider round"></span>
             </label>
           </div>
@@ -127,8 +126,7 @@ class DeviceControlWithSlider extends Component {
                 {this.state.check == true && (
                   <button
                     className="d-inline-block slider-device-button btn primary-bg text-light"
-                    onClick={this.decrementspeed}
-                  >
+                    onClick={this.decrementspeed}>
                     -
                   </button>
                 )}
@@ -147,12 +145,11 @@ class DeviceControlWithSlider extends Component {
                   <div
                     className="text-box d-inline-block"
                     style={{
-                      padding: "40px",
-                      marginBottom: "40px",
-                      border: "2px solid #6F5CEA",
-                      borderRadius: "50%",
-                    }}
-                  >
+                      padding: '40px',
+                      marginBottom: '40px',
+                      border: '2px solid #6F5CEA',
+                      borderRadius: '50%',
+                    }}>
                     <h3 className="text-1">OFF</h3>
                   </div>
                 )}
@@ -161,8 +158,7 @@ class DeviceControlWithSlider extends Component {
                 {this.state.check == true && (
                   <button
                     className="d-inline-block slider-device-button btn primary-bg text-light"
-                    onClick={this.incrementspeed}
-                  >
+                    onClick={this.incrementspeed}>
                     +
                   </button>
                 )}
