@@ -1,29 +1,83 @@
-{
-  "sensor": [
-    {
-      "id": 1,
-      "status": 1,
-      "type": 0
+[
+  {
+    "sensor": [
+      {
+        "id": 1,
+        "status": 1,
+        "type": 0
+      },
+      {
+        "id": 2,
+        "status": 1,
+        "type": 1
+      },
+      {
+        "id": 3,
+        "status": 0,
+        "type": 2
+      }
+    ],
+    "temphum": [
+      {
+        "value": 35,
+        "type": 0
+      },
+      {
+        "value": 33,
+        "type": 1
+      }
+    ]
+  },
+  {
+    "load": {
+      "lights": [
+        {
+          "idled": 1,
+          "status": "ON",
+          "className": "lightOn"
+        },
+        {
+          "idled": 2,
+          "status": "OFF",
+          "className": "lightOff"
+        }
+      ],
+      "fan": [
+        {
+          "fan_id": 1,
+          "status": "ON",
+          "speed": 80
+        }
+      ]
     },
-    {
-      "id": 2,
-      "status": 1,
-      "type": 1
-    },
-     {
-      "id": 3,
-      "status": 0,
-      "type": 2
-    }
-  ],
-  "temphum": [
-    {
-      "value": 35,
-      "type": 0
-    },
-    {
-      "value": 33,
-      "type": 1
-    }
-  ]
-}
+    "sensor": [
+      {
+        "id": 0,
+        "status": 0,
+        "type": 0
+      },
+      {
+        "id": 1,
+        "status": 1,
+        "type": 1
+      },
+      {
+        "id": 2,
+        "status": 1,
+        "type": 2
+      }
+    ],
+    "temphum": [
+      {
+        "id": 0,
+        "value": 0.5,
+        "type": 0
+      },
+      {
+        "id": 1,
+        "value": 0.6,
+        "type": 1
+      }
+    ]
+  }
+]

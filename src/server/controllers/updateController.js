@@ -50,68 +50,68 @@ exports.updateled = (req, res) => {
 };
 
 exports.updateDevice = (req, res) => {
+
   if (!req.body) {
     res.status(400).send({
       message: 'Content can not be empty!',
     });
   }
-  console.log(req.body);
-  dataretrieve.lastTemp((err, data) => {
-    if (err) {
-      res.status(500).send({
-        message: err.message || 'Some error occurred in data retrieve function',
-      });
-    } else {
-      if (
-        req.body.temphum[0].value === data.tmp &&
-        req.body.temphum[1].value === data.hum
-      ) {
-        delete req.body['temphum'];
-      }
-      if (req.body.temphum) {
-        temp = {
-          tmp: req.body.temphum[0].value,
-          hum: req.body.temphum[1].value,
-        };
-        delete req.body['temphum'];
-        req.body['temphum'] = temp;
-      }
-      updatedata.updateDevice(req.body, (err, data) => {
-        if (err) {
-          res.status(400).send({ message: 'update device have some error' });
-        } else {
-          res.send({
-            message: 'success',
-          });
+  console.log("Here REq body ", req.body.temphum);
+  // res.send(req.body);
+  if (req.body.temphum !== undefined) {
+    dataretrieve.lastTemp((err, data) => {
+      if (err) {
+        res.status(500).send({
+          message: err.message || 'Some error occurred in data retrieve function',
+        });
+      } else {
+        if (req.body.temphum[0].value === data.tmp &&
+          req.body.temphum[1].value === data.hum
+        ) {
+          delete req.body['temphum'];
         }
-      });
-    }
-  });
-};
+        if (req.body.temphum) {
+          temp = {
+            tmp: req.body.temphum[0].value,
+            hum: req.body.temphum[1].value,
+          };
+          delete req.body['temphum'];
+          req.body['temphum'] = temp;
+        }
 
-exports.updateDevice2 = (req, res) => {
-  if (!req.body) {
-    res.status(400).send({
-      message: 'Content can not be empty!',
+      }
     });
   }
-  console.log(req.body);
-
-  dataretrieve.lastTemp((err, data) => {
+  updatedata.updateDevice(req.body, (err, data) => {
     if (err) {
-      res.status(500).send({
-        message: err.message || 'Some error occurred in data retrieve function',
-      });
+      res.status(400).send({ message: 'update device have some error' });
     } else {
-      updatedata.updateDevice(req.body, (err, data) => {
-        if (err) {
-          res.status(400).send({ message: 'update device have some error' });
-        } else {
-          res.send({
-            message: 'success',
-          });
-        }
+      res.send({
+        message: 'success',
+        data: req.body
       });
     }
   });
+
 };
+
+// exports.updateDevice2 = (req, res) => {
+//   if (!req.body) {
+//     res.status(400).send({
+//       message: 'Content can not be empty!',
+//     });
+//   }
+//   console.log(req.body);
+
+
+//   // updatedata.updateDevice2(req.body, (err, data) => {
+//   //   if (err) {
+//   //     res.status(400).send({ message: 'update device have some error' });
+//   //   } else {
+//   //     res.send({
+//   //       message: 'success',
+//   //     });
+//   //   }
+//   // });
+// }
+

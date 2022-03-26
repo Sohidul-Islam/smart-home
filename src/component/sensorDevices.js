@@ -10,6 +10,15 @@ export default class SensorDevices extends Component {
     sensorData: [],
   };
   componentDidMount() {
+    // axios
+    //   .get(`http://localhost:8000/device`)
+    //   .then(res => {
+    //     const TempSensorData = res.data.sensor;
+    //     this.setState({ sensorData: TempSensorData });
+    //   })
+    //   .catch(error => {
+    //     console.error(error);
+    //   });
     setInterval(() => {
       axios
         .get(`http://localhost:8000/device`)
@@ -20,7 +29,7 @@ export default class SensorDevices extends Component {
         .catch(error => {
           console.error(error);
         });
-    }, 2000);
+    }, 5000);
   }
   render() {
     var user = 'Shufol';

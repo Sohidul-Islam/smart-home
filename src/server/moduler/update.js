@@ -47,6 +47,7 @@ const UpdateQueryHandler = async (SqlQuery, result) => {
 };
 
 dataupdate.updateDevice = (update, result) => {
+  console.log("update data: ", update);
   var SqlQuery = ``;
   var query1 = `update led set status ='${update.status}', className = '${update.className}' where idled = ${update.idled}`;
   var query2 = `update fan set status ='${update.status}', speed = ${update.speed} where fan_id = ${update.fan_id};`;
@@ -56,6 +57,7 @@ dataupdate.updateDevice = (update, result) => {
     UpdateQueryHandler(SqlQuery, result);
   } else if (update.fan_id != undefined) {
     SqlQuery = query2;
+    console.log("fan query: ", SqlQuery);
     UpdateQueryHandler(SqlQuery, result);
   }
 
@@ -74,4 +76,37 @@ dataupdate.updateDevice = (update, result) => {
   }
 };
 
+// dataupdate.updateDevice2 = (update, result) => {
+//   console.log("update module: ", update.sensor);
+//   var SqlQuery = ``;
+//   var query1 = `update led set status ='${update.status}', className = '${update.className}' where idled = ${update.idled}`;
+//   var query2 = `update fan set status ='${update.status}', speed = ${update.speed} where fan_id = ${update.fan_id};`;
+//   var query3 = `update tmphum set tmp = ${update.tmp},hum=${update.hum},date='${update.date}' where tmpid = ${update.tmpid};`;
+//   var query4 = "";
+
+//   if (update.idled != undefined) {
+//     console.log("we get idled");
+//     SqlQuery = query1;
+//     UpdateQueryHandler(SqlQuery, result);
+//   }
+//   else if (update.fan_id != undefined) {
+//     console.log("we get fanid");
+//     SqlQuery = query2;
+//     UpdateQueryHandler(SqlQuery, result);
+//   }
+
+//   if (update.sensor != undefined) {
+//     console.log("we get sensor");
+//     console.log("For Sensor Query: ", update.sensor.length);
+//     for (let i = 0; i < update.sensor.length; i++) {
+//       query4 += `update sensor set status = ${update.sensor[i].status} where id = ${update.sensor[i].id};`;
+
+//     }
+//     console.log(query4);
+//     SqlQuery = query4;
+//     UpdateQueryHandler(SqlQuery, result);
+//     query4 = ""
+//   }
+
+// };
 module.exports = dataupdate;

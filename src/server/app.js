@@ -2,8 +2,6 @@ const express = require('express');
 //call express js modules web framwork for nodejs
 
 const ejs = require('ejs');
-var session = require('express-session');
-var MySQLStore = require('express-mysql-session');
 var cors = require('cors');
 
 var fs = require('fs');
@@ -17,26 +15,9 @@ const sql = require('./moduler/db');
 
 // creat app
 
-var sessionStore = new MySQLStore(
-  {
-    clearExpired: true,
-    checkExpirationInterval: 3600000,
-  },
-  sql
-);
 
 const app = express();
-app.use(
-  session({
-    secret: 'cookie_secret',
-    resave: false,
-    saveUninitialized: true,
-    store: sessionStore,
-    cookie: {
-      expires: 3600000,
-    },
-  })
-);
+
 
 app.use(flash());
 // store express module in app constant variable

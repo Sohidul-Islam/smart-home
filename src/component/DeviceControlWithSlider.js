@@ -39,7 +39,7 @@ class DeviceControlWithSlider extends Component {
     }
 
     setTimeout(() => {
-      const url = 'http://localhost:8000/device/update2';
+      const url = 'http://localhost:8000/device';
       const requestMetadata = {
         method: 'POST',
         headers: {
