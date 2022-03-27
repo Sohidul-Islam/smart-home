@@ -21,7 +21,6 @@ class DeviceControl extends Component {
   }
 
   // statContentUpdate() {
-  //     console.log("set update; ");
   //     if (this.props.status !== this.state.status) {
   //         if (this.props.status === "ON") {
   //             this.setState({
@@ -45,7 +44,6 @@ class DeviceControl extends Component {
   DeviceControlSwitch = event => {
     // const url = "http://192.168.1.5:8000/led/update";
     const url = 'http://localhost:8000/device';
-    // console.log("event: ", event.target.checked);
     var check = event.target.checked;
     var newState = this.state;
     if (check === true) {

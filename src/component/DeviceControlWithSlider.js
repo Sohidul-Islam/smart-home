@@ -40,11 +40,23 @@ class DeviceControlWithSlider extends Component {
 
     setTimeout(() => {
       const url = 'http://localhost:8000/device';
+      // const tempfan = {
+      //   load: {
+      //     fan: [
+      //       {
+      //         fan_id: this.state.fan_id,
+      //         status: this.state.status,
+      //         speed: this.state.speed,
+      //       },
+      //     ],
+      //   },
+      // };
       const requestMetadata = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+
         body: JSON.stringify(this.state),
       };
       fetch(url, requestMetadata)
@@ -83,6 +95,17 @@ class DeviceControlWithSlider extends Component {
       speed,
     });
     const url = 'http://localhost:8000/device';
+    // const tempfan = {
+    //   load: {
+    //     fan: [
+    //       {
+    //         fan_id: this.state.fan_id,
+    //         status: this.state.status,
+    //         speed: this.state.speed,
+    //       },
+    //     ],
+    //   },
+    // };
     const requestMetadata = {
       method: 'POST',
       headers: {

@@ -10,7 +10,7 @@ h6 {
 } */
 
 body {
-  font-family: "Mulish", sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-weight: 400;
   padding: 0px;
   margin: 0px;
@@ -39,7 +39,7 @@ body {
 }
 .welcome-card {
   border: none !important;
-  margin: 40px 0px 40px 0;
+  margin: 24px 0px 24px 0;
 }
 .welcome-card-icon {
   font-size: 24px !important;
@@ -47,7 +47,7 @@ body {
 }
 
 .card-text-1 {
-  font-family: "GFS Didot", serif;
+  font-family: 'GFS Didot', serif;
   color: #c45a01;
   font-size: 32px;
 }
@@ -140,7 +140,7 @@ body {
 
 .slider:before {
   position: absolute;
-  content: "";
+  content: '';
   height: 16px;
   width: 16px;
   left: 0px;

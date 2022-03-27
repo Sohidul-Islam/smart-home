@@ -1,58 +1,52 @@
-const sql = require("./db");
+const sql = require('./db');
 var curdate = new Date();
 const datainsert = function (insert) {
-    this.status = insert.status;
-    this.speed = insert.speed;
-    this.tmp = insert.tmp;
-    this.hum = insert.hum;
-    this.date = handleDate(curdate);
+  this.status = insert.status;
+  this.speed = insert.speed;
+  this.tmp = insert.tmp;
+  this.hum = insert.hum;
+  this.date = handleDate(curdate);
 };
 
-datainsert.insertled = (result) => {
-    sql.query("INSERT INTO led(status) values('OFF')", (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(err, null);
-            return;
-        }
+datainsert.insertled = result => {
+  sql.query("INSERT INTO led(status) values('OFF')", (err, res) => {
+    if (err) {
+      result(err, null);
+      return;
+    }
 
-        // console.log("Led added successfully ", res);
-        result(null, res);
-    });
+    result(null, res);
+  });
 };
 
-datainsert.insertFan = (result) => {
-    sql.query("INSERT INTO fan(speed,status) values('20','OFF')", (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(err, null);
-            return;
-        }
+datainsert.insertFan = result => {
+  sql.query("INSERT INTO fan(speed,status) values('20','OFF')", (err, res) => {
+    if (err) {
+      result(err, null);
+      return;
+    }
 
-        // console.log("Led added successfully ", res);
-        result(null, res);
-    });
+    result(null, res);
+  });
 };
-datainsert.inserttmphum = (result) => {
-    sql.query("INSERT INTO tmphum(tmp,hum) values('0.00','0.00')", (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(err, null);
-            return;
-        }
+datainsert.inserttmphum = result => {
+  sql.query("INSERT INTO tmphum(tmp,hum) values('0.00','0.00')", (err, res) => {
+    if (err) {
+      result(err, null);
+      return;
+    }
 
-        // console.log("Led added successfully ", res);
-        result(null, res);
-    });
+    result(null, res);
+  });
 };
 
-const handleDate = (dataD) => {
-    let data = new Date(dataD);
-    let month = data.getMonth() + 1;
-    let day = data.getDate();
-    let year = data.getFullYear();
-    const postDate = year + "-" + month + "-" + day;
-    return postDate;
+const handleDate = dataD => {
+  let data = new Date(dataD);
+  let month = data.getMonth() + 1;
+  let day = data.getDate();
+  let year = data.getFullYear();
+  const postDate = year + '-' + month + '-' + day;
+  return postDate;
 };
 
 module.exports = datainsert;

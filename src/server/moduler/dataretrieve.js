@@ -7,40 +7,33 @@ const deviceStatus = function (led) {
 deviceStatus.allLed = result => {
   sql.query('SELECT * FROM led', (err, res) => {
     if (err) {
-      console.log('error: ', err);
       result(null, err);
       return;
     }
-    // console.log("product: ", res);
     result(null, res);
   });
 };
 deviceStatus.allFan = result => {
   sql.query('SELECT * FROM fan', (err, res) => {
     if (err) {
-      console.log('error: ', err);
       result(null, err);
       return;
     }
-    // console.log("product: ", res);
     result(null, res);
   });
 };
 deviceStatus.alltmphum = result => {
   sql.query('SELECT * FROM tmphum', (err, res) => {
     if (err) {
-      console.log('error: ', err);
       result(null, err);
       return;
     }
-    // console.log("product: ", res);
     result(null, res);
   });
 };
 deviceStatus.lastTemp = result => {
   sql.query('SELECT * FROM tmphum ORDER BY id DESC LIMIT 1;', (err, res) => {
     if (err) {
-      console.log('error: ', err);
       result(null, err);
       return;
     }
@@ -54,11 +47,9 @@ deviceStatus.getAll = result => {
 
   sql.query(q1, (err, res) => {
     if (err) {
-      console.log('error: ', err);
       result(null, err);
       return;
     }
-    // console.log("Query TESTING: ", res);
     result(null, res);
   });
 };

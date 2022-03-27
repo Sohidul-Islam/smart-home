@@ -20,15 +20,11 @@ exports.updateled = (req, res) => {
     });
   }
 
-  // console.log("led update rq body: ", req.body);
-
   const Updatedata = new updatedata({
     idled: req.body.idled,
     status: req.body.status,
     className: req.body.className,
   });
-  // console.log("productlist: ", productlist);
-  // console.log("description: ", req.body.des);
 
   updatedata.updateled(Updatedata, (err, data) => {
     if (err) {
@@ -50,22 +46,22 @@ exports.updateled = (req, res) => {
 };
 
 exports.updateDevice = (req, res) => {
-
   if (!req.body) {
     res.status(400).send({
       message: 'Content can not be empty!',
     });
   }
-  console.log("Here REq body ", req.body.temphum);
   // res.send(req.body);
   if (req.body.temphum !== undefined) {
     dataretrieve.lastTemp((err, data) => {
       if (err) {
         res.status(500).send({
-          message: err.message || 'Some error occurred in data retrieve function',
+          message:
+            err.message || 'Some error occurred in data retrieve function',
         });
       } else {
-        if (req.body.temphum[0].value === data.tmp &&
+        if (
+          req.body.temphum[0].value === data.tmp &&
           req.body.temphum[1].value === data.hum
         ) {
           delete req.body['temphum'];
@@ -84,7 +80,7 @@ exports.updateDevice = (req, res) => {
           } else {
             res.send({
               message: 'success',
-              data: req.body
+              data: req.body,
             });
           }
         });
@@ -97,13 +93,11 @@ exports.updateDevice = (req, res) => {
       } else {
         res.send({
           message: 'success',
-          data: req.body
+          data: req.body,
         });
       }
     });
   }
-
-
 };
 
 // exports.updateDevice2 = (req, res) => {
@@ -112,8 +106,6 @@ exports.updateDevice = (req, res) => {
 //       message: 'Content can not be empty!',
 //     });
 //   }
-//   console.log(req.body);
-
 
 //   // updatedata.updateDevice2(req.body, (err, data) => {
 //   //   if (err) {
@@ -125,4 +117,3 @@ exports.updateDevice = (req, res) => {
 //   //   }
 //   // });
 // }
-

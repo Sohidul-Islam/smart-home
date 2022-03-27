@@ -8,7 +8,6 @@ exports.led = (req, res) => {
           err.message || 'Some error occured in inventoryReport function',
       });
     } else {
-      // console.log("data: ", data);
       res.send(data);
     }
   });
@@ -45,9 +44,6 @@ exports.allDevice = (req, res) => {
           err.message || 'Some error occured in inventoryReport function',
       });
     } else {
-      // console.log("All Load Devices: ", data);
-
-      console.log(data);
       for (let i = 0; i < data[0].length; i++) {
         if (data[0][i].status == 'ON') {
           data[0][i].status = 1;
@@ -63,6 +59,7 @@ exports.allDevice = (req, res) => {
         } else {
           data[1][i].status = 0;
         }
+        data[1][i].speed = 255 * (data[1][i].speed / 100);
       }
       let device = {
         load: {
@@ -71,7 +68,6 @@ exports.allDevice = (req, res) => {
         },
         sensor: data[2],
       };
-      console.log(device);
       res.send(device);
     }
   });
