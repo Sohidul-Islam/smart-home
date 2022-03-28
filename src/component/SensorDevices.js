@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import axios from 'axios';
+import audio1 from '../siren.mp3';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import usePrevious from './usePrevious';
@@ -145,6 +146,9 @@ export default class SensorDevices extends Component {
                 className="col- col-xm-6 col-sm-6 col-md-6 col-lg-4">
                 <div className={isDetected(value.status) + ' card Sensor-card'}>
                   <div className="card-body">
+                    {value.status == 1 && <audio preload="auto" autoplay="true" src={audio1}>
+                      Your browser does not support the HTML5 audio element.
+                    </audio>}
                     <i className={sensorIcon(value.type) + ' sensorIcon'}></i>
                     <h4 style={{ marginTop: '16px', marginBottom: '0px' }}>
                       {sensorType(value.type)}

@@ -1,5 +1,15 @@
 const ledStatus = require('../moduler/dataretrieve');
+// const sleep = (milliseconds) => {
+//   return new Promise(resolve => setTimeout(resolve, milliseconds))
+// }
 
+// /*Use like so*/
+
+// async function timeSensativeAction() { //must be async func
+//   //do something here
+//   await sleep(5000) //wait 5 seconds
+//   //continue on...
+// }
 exports.led = (req, res) => {
   ledStatus.allLed((err, data) => {
     if (err) {
